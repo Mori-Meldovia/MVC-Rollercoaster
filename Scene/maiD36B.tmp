@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1rgedgq1gjmf"]
+
+[ext_resource type="Script" path="res://Scripts/path_3d.gd" id="1_i3rbo"]
+
+[sub_resource type="Curve3D" id="Curve3D_r4jou"]
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(0.716253, -3.05036e-08, -0.69784, 3.05036e-08, 1, -1.2403e-08, 0.69784, -1.2403e-08, 0.716253, 0, 0, 0)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_r4jou")
+script = ExtResource("1_i3rbo")

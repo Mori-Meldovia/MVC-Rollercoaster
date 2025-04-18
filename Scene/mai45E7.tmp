@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqe7myxrdrh0w"]
+
+[ext_resource type="Script" path="res://Scripts/path_3d.gd" id="1_i3rbo"]
+[ext_resource type="Texture2D" uid="uid://dolm86veg22sd" path="res://hausdorf_clear_sky_4k.exr" id="1_k87n7"]
+[ext_resource type="Script" path="res://Scripts/camera_3d.gd" id="3_djt4t"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jfykr"]
+panorama = ExtResource("1_k87n7")
+
+[sub_resource type="Sky" id="Sky_y35ea"]
+sky_material = SubResource("PanoramaSkyMaterial_jfykr")
+
+[sub_resource type="Environment" id="Environment_u1ahg"]
+background_mode = 2
+sky = SubResource("Sky_y35ea")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tfesc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qr2m5"]
+albedo_color = Color(1, 0.654902, 1, 1)
+albedo_texture = SubResource("CanvasTexture_tfesc")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0ufsu"]
+
+[sub_resource type="Curve3D" id="Curve3D_skp3m"]
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(0.716253, -3.05036e-08, -0.69784, 3.05036e-08, 1, -1.2403e-08, 0.69784, -1.2403e-08, 0.716253, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -4.44089e-15, 0, 5.32907e-15, 1, -8.88178e-16, 0, 2.66454e-15, 1, 1.45973e-06, 47.8545, -5.93537e-07)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u1ahg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, -3.55271e-15, 3.05176e-05, 9.09495e-13, 1, 0, -3.05176e-05, -8.88178e-16, 1000, 0, -10, 0)
+material_override = SubResource("StandardMaterial3D_qr2m5")
+mesh = SubResource("PlaneMesh_0ufsu")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_skp3m")
+script = ExtResource("1_i3rbo")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+transform = Transform3D(0.999374, -0.0353666, -0.0006423, 0.0353666, 0.998715, 0.0362998, -0.000642329, -0.0362998, 0.999341, 5.24934, 12.226, 1.73647)
+polygon = PackedVector2Array(0, 0, 0.0262079, 0.194022, 1.89376, 0.147025, 1.92395, -0.0211344)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.1
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("3_djt4t")
